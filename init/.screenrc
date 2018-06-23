@@ -1,0 +1,28 @@
+#
+# ~/.screenrc
+#
+# ..........
+startup_message off
+
+#  ..screen.....Ctrl-a......Ctrl-a... Ctrl-A a.
+escape ^Aa
+
+# ..... 2000 ..
+defscrollback 2000
+
+# ..............
+hardstatus off
+hardstatus alwayslastline
+hardstatus string "%{.bW}%-w%{.rY}%n %t%{-}%+w %=%{..G} %H(%l) %{..Y} %Y/%m/%d %c:%s "
+
+# ......
+vbell off
+
+# . Ctrl-Z w . Ctrl-Z Ctrl-W ......
+bind w windowlist -b
+bind ^w windowlist -b
+
+shelltitle 'task'
+
+#使用 X 滚动机制
+termcapinfo xterm* ti@:te@
