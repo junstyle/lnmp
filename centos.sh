@@ -19,3 +19,9 @@ cp -rvf ./init/.bash_profile /root/.bash_profile
 cp -rvf ./init/.screenrc /root/.screenrc
 cp -rvf ./init/.vimrc /root/.vimrc
 
+#开放端口
+iptables -D INPUT 4  //删除input的第3条规则
+iptables -I INPUT 4 -p tcp -m state --state NEW -m tcp --dport 7639 -j ACCEPT	#4为规则号
+iptables -I INPUT 5 -p tcp -m state --state NEW -m tcp --dport 80 -j ACCEPT	#5为规则号
+iptables -I INPUT 6 -p tcp -m state --state NEW -m tcp --dport 443 -j ACCEPT
+iptables-save > /etc/sysconfig/iptables
