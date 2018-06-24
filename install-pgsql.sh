@@ -5,11 +5,11 @@ install_pgsql(){
 	yum -y install postgresql10 postgresql10-server postgresql10-contrib
 	# service postgresql-10 initdb --locale=zh_CN.UTF-8
 	service postgresql-10 initdb
-	service postgresql-10 on
+	chkconfig postgresql-10 on
 	service postgresql-10 start
 
 	yum -y install pgbouncer
-	service pgbouncer on
+	chkconfig pgbouncer on
 	service pgbouncer start
 
 	touch /var/lib/pgsql/.psql_history
