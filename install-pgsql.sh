@@ -3,7 +3,8 @@
 install_pgsql(){
 	yum -y install https://download.postgresql.org/pub/repos/yum/10/redhat/rhel-6-x86_64/pgdg-centos10-10-2.noarch.rpm
 	yum -y install postgresql10 postgresql10-server postgresql10-contrib
-	service postgresql-10 initdb --locale=zh_CN.UTF-8
+	# service postgresql-10 initdb --locale=zh_CN.UTF-8
+	service postgresql-10 initdb
 	service postgresql-10 on
 	service postgresql-10 start
 
