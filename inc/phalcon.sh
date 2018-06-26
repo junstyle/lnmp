@@ -10,3 +10,6 @@ fi
 
 cd cphalcon/build
 sudo ./install
+
+cd -
+cd -
