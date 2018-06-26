@@ -1,4 +1,7 @@
 #!/bin/bash
+yum install -y gcc
+
+backdir=`pwd`
 
 cd /root/git
 
@@ -11,5 +14,4 @@ fi
 cd cphalcon/build
 sudo ./install
 
-cd -
-cd -
+cd $backdir
