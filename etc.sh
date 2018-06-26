@@ -16,10 +16,10 @@ read -p "Please input nginx authorized_user pwd: " auth_user_pass
 
 if [ "$auth_user_pass" != "no" ]; then
 	pwd=`openssl passwd -crypt $auth_user_pass`
-	printf "u1:$pwd\n" >>/home/etc/nginx/authorized_user.txt
+	printf "u1:$pwd\n" >> /etc/nginx/authorized_user.txt
 fi
 
-cp -rvf ./etc/* /home/etc
+cp -rvf ./etc/* /etc
 
 service php-fpm reload
 service nginx reload
