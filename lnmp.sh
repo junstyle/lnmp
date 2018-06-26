@@ -21,7 +21,7 @@ install_php(){
 	yum -y install php71u-fpm php71u-cli php71u-xml php71u-gd php71u-mysqlnd php71u-pdo php71u-mcrypt php71u-mbstring php71u-json php71u-pgsql php71u-opcache php71u-pecl-redis
 
 	chkconfig php-fpm on
-	
+
 	mkdir /home/etc
 	mkdir /home/log
 
@@ -119,5 +119,9 @@ install_php
 install_mysql
 install_nginx
 install_redis
+
+source ./inc/phalcon.sh
+source ./etc.sh
+
 
 echo '------------------ all over --------------------------'
