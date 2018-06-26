@@ -29,6 +29,8 @@ install_php(){
 	ln -sf /etc/php-fpm.conf /home/etc/php-fpm.conf
 	rm -rvf /home/etc/php-fpm.d
 	ln -sf /etc/php-fpm.d /home/etc/php-fpm.d
+	rm -rvf /home/etc/php.d
+	ln -sf /etc/php.d /home/etc/php.d
 	rm -rvf /home/log/php-fpm
 	ln -sf /var/log/php-fpm /home/log/php-fpm
 	chown www:www /var/log/php-fpm
