@@ -76,6 +76,9 @@ install_mysql(){
 
 	# sed -i 's@executing mysqld_safe@executing mysqld_safe\nexport LD_PRELOAD=/usr/local/lib/libjemalloc.so@' /usr/bin/mysqld_safe
 
+	# show temp pwd
+	grep "password" /var/log/mysqld.log
+
 	mysql_secure_installation
 }
 
@@ -156,6 +159,9 @@ case ${which_install} in
 		;;
 	redis*)
 		install_redis
+		;;
+	phalcon*)
+		source ./inc/phalcon.sh
 		;;
 	*)
 		remove_anmp

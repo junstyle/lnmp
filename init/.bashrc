@@ -54,13 +54,37 @@ setp_www () {
 }
 
 togbk () {
-  while read line ; do 
+  while read line ; do
     echo "$line" | iconv -f utf-8 -t gbk
   done
 }
 
 toutf8 () {
-  while read line ; do 
+  while read line ; do
     echo "$line" | iconv -f gbk -t utf-8
   done
+}
+
+vstart () {
+  systemctl start $*
+  systemctl status $* &
+}
+
+vstart2 () {
+  systemctl start $* && journalctl -fexu $*
+}
+
+vstop () {
+  systemctl stop $*
+  systemctl status $* &
+}
+
+vrestart () {
+  systemctl restart $*
+  systemctl status $* &
+}
+
+vreload () {
+  systemctl reload $*
+  systemctl status $* &
 }
