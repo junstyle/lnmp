@@ -9,6 +9,7 @@ remove_anmp(){
     rpm -e php-mysql php-cli php-gd php-common php
 
     yum -y remove httpd*
+	yum -y remove nginx*
     yum -y remove mysql-server mysql mysql-libs
     yum -y remove php*
     yum -y remove mariadb*
@@ -35,7 +36,7 @@ install_php(){
     groupadd www
     useradd -s /sbin/nologin -g www www
 
-	yum -y install php71u-fpm php71u-cli php71u-xml php71u-gd php71u-mysqlnd php71u-pdo php71u-mcrypt php71u-mbstring php71u-json php71u-pgsql php71u-opcache php71u-pecl-redis php71u-devel
+	yum -y install php72u-fpm php72u-cli php72u-xml php72u-gd php72u-mysqlnd php72u-pdo php72u-mcrypt php72u-mbstring php72u-json php72u-pgsql php72u-opcache php72u-pecl-redis php72u-devel
 
 	mkdir /home/etc
 	mkdir /home/log
@@ -57,8 +58,10 @@ install_php(){
 
 install_mysql(){
 	# yum -y remove mysql*
-	yum -y install mysql57u mysql57u-server mysql57u-devel
-	
+	rpm -Uvh https://dev.mysql.com/get/mysql80-community-release-el7-1.noarch.rpm
+
+	yum install mysql-community-server -y
+
 	start_service mysqld
 
 	mkdir /home/db
@@ -71,7 +74,7 @@ install_mysql(){
 	chown mysql:mysql /var/log/mysqld-slow.log
 	ln -sf /var/log/mysqld-slow.log /home/log/mysqld-slow.log
 
-	sed -i 's@executing mysqld_safe@executing mysqld_safe\nexport LD_PRELOAD=/usr/local/lib/libjemalloc.so@' /usr/bin/mysqld_safe
+	# sed -i 's@executing mysqld_safe@executing mysqld_safe\nexport LD_PRELOAD=/usr/local/lib/libjemalloc.so@' /usr/bin/mysqld_safe
 
 	mysql_secure_installation
 }
@@ -130,15 +133,41 @@ eof
 	fi
 }
 
-remove_anmp
-opt_server
-install_php
-install_mysql
-install_nginx
-install_redis
 
-source ./inc/phalcon.sh
-source ./etc.sh
+echo
+read -p "Please input which do you want to install: " which_install
+[ -z "$which_install" ] && which_install="all"
 
+case ${which_install} in
+	remove_anmp*)
+		remove_anmp
+		;;
+	opt_server*)
+		opt_server
+		;;
+	php*)
+		install_php
+		;;
+	mysql*)
+		install_mysql
+		;;
+	nginx*)
+		install_nginx
+		;;
+	redis*)
+		install_redis
+		;;
+	*)
+		remove_anmp
+		opt_server
+		install_php
+		install_mysql
+		install_nginx
+		install_redis
+
+		source ./inc/phalcon.sh
+		source ./etc.sh
+		;;
+esac
 
 echo '------------------ all over --------------------------'
