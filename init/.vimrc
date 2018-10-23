@@ -22,7 +22,7 @@ set cursorline " hightlight cursor line 高亮光标所在行
 " set the back space
 set backspace=indent,eol,start "这行比较重要，刚接触vim的朋友会发现有时候backspace键删不了文字
 
-colorscheme desert " color scheme
+" colorscheme desert " color scheme
 
 " the following function is used for show the status bar on the buttom
 function! CurrectDir()
