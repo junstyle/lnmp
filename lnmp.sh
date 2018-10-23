@@ -11,7 +11,24 @@ remove_anmp(){
     yum -y remove httpd*
     yum -y remove mysql-server mysql mysql-libs
     yum -y remove php*
+    yum -y remove mariadb*
     yum clean all
+}
+
+start_service(){
+	RELEASE_RPM=$(rpm -qf /etc/redhat-release)
+	RELEASE=$(rpm -q --qf '%{VERSION}' ${RELEASE_RPM})
+
+	case ${RELEASE} in
+		6*)
+			chkconfig $1 on
+			service $1 restart
+			;;
+		7*)
+			systemctl enable $1
+			systemctl restart $1
+			;;
+	esac
 }
 
 install_php(){
@@ -19,8 +36,6 @@ install_php(){
     useradd -s /sbin/nologin -g www www
 
 	yum -y install php71u-fpm php71u-cli php71u-xml php71u-gd php71u-mysqlnd php71u-pdo php71u-mcrypt php71u-mbstring php71u-json php71u-pgsql php71u-opcache php71u-pecl-redis php71u-devel
-
-	chkconfig php-fpm on
 
 	mkdir /home/etc
 	mkdir /home/log
@@ -37,14 +52,14 @@ install_php(){
 	sed -i 's@user = php-fpm@user = www@' /etc/php-fpm.d/www.conf
 	sed -i 's@group = php-fpm@group = www@' /etc/php-fpm.d/www.conf
 
-	service php-fpm restart
+	start_service php-fpm
 }
 
 install_mysql(){
 	# yum -y remove mysql*
 	yum -y install mysql57u mysql57u-server mysql57u-devel
-	chkconfig mysqld on
-	service mysqld start
+	
+	start_service mysqld
 
 	mkdir /home/db
 
@@ -73,7 +88,6 @@ EOF
 	fi
 
 	yum -y install nginx
-	chkconfig nginx on
 
     groupadd www
     useradd -s /sbin/nologin -g www www
@@ -85,16 +99,17 @@ EOF
 
 	sed -i 's/user  nginx;/user  www;/g' /etc/nginx/nginx.conf
 
-	service nginx restart
+	start_service nginx
 }
 
 install_redis(){
 	yum -y install redis32u
-	chkconfig redis on
 
 	ln -sf /etc/redis.conf /home/etc/redis.conf
 	rm -rvf /home/log/redis
 	ln -sf /var/log/redis /home/log/redis
+
+	start_service redis
 }
 
 opt_server(){
