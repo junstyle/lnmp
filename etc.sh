@@ -6,7 +6,7 @@ if [ ! -d "/home/www/default" ]; then
 	chmod -R 644 /home/www/default
 fi
 # adminer.php
-curl https://github.com/vrana/adminer/releases/download/v4.6.3/adminer-4.6.3.php > /home/www/default/adminer.php
+curl -L https://github.com/vrana/adminer/releases/download/v4.6.3/adminer-4.6.3.php > /home/www/default/adminer.php
 cp -rvf ./www/default/* /home/www/default/
 
 
