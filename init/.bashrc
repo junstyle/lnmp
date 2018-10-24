@@ -88,3 +88,7 @@ vreload () {
   systemctl reload $*
   systemctl status $* &
 }
+
+vstatus () {
+  systemctl status $*
+}

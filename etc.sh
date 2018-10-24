@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ ! -d "/home/www/default" ]; then
-	mkdir -p /home/www/default
+	mkdir -vp /home/www/default
 	chown -R www:www /home/www/default
 	chmod -R 644 /home/www/default
 fi

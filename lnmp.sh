@@ -38,17 +38,17 @@ install_php(){
 
 	yum -y install php72u-fpm php72u-cli php72u-xml php72u-gd php72u-mysqlnd php72u-pdo php72u-mcrypt php72u-mbstring php72u-json php72u-pgsql php72u-opcache php72u-pecl-redis php72u-devel
 
-	mkdir /home/etc
-	mkdir /home/log
+	mkdir -v /home/etc
+	mkdir -v /home/log
 
-	ln -sf /etc/php.ini /home/etc/php.ini
-	ln -sf /etc/php-fpm.conf /home/etc/php-fpm.conf
+	ln -vsf /etc/php.ini /home/etc/php.ini
+	ln -vsf /etc/php-fpm.conf /home/etc/php-fpm.conf
 	rm -rvf /home/etc/php-fpm.d
-	ln -sf /etc/php-fpm.d /home/etc/php-fpm.d
+	ln -vsf /etc/php-fpm.d /home/etc/php-fpm.d
 	rm -rvf /home/etc/php.d
-	ln -sf /etc/php.d /home/etc/php.d
+	ln -vsf /etc/php.d /home/etc/php.d
 	rm -rvf /home/log/php-fpm
-	ln -sf /var/log/php-fpm /home/log/php-fpm
+	ln -vsf /var/log/php-fpm /home/log/php-fpm
 	chown www:www /var/log/php-fpm
 	sed -i 's@user = php-fpm@user = www@' /etc/php-fpm.d/www.conf
 	sed -i 's@group = php-fpm@group = www@' /etc/php-fpm.d/www.conf
@@ -64,15 +64,15 @@ install_mysql(){
 
 	start_service mysqld
 
-	mkdir /home/db
+	mkdir -v /home/db
 
 	rm -rvf /home/db/mysql
-	ln -sf /var/lib/mysql /home/db/mysql
-	ln -sf /var/log/mysqld.log /home/log/mysqld.log
+	ln -vsf /var/lib/mysql /home/db/mysql
+	ln -vsf /var/log/mysqld.log /home/log/mysqld.log
 
 	touch /var/log/mysqld-slow.log
 	chown mysql:mysql /var/log/mysqld-slow.log
-	ln -sf /var/log/mysqld-slow.log /home/log/mysqld-slow.log
+	ln -vsf /var/log/mysqld-slow.log /home/log/mysqld-slow.log
 
 	# sed -i 's@executing mysqld_safe@executing mysqld_safe\nexport LD_PRELOAD=/usr/local/lib/libjemalloc.so@' /usr/bin/mysqld_safe
 
@@ -99,9 +99,9 @@ EOF
     useradd -s /sbin/nologin -g www www
 
     rm -rvf /home/etc/nginx
-	ln -sf /etc/nginx /home/etc/nginx
+	ln -vsf /etc/nginx /home/etc/nginx
 	rm -rvf /home/log/nginx
-	ln -sf /var/log/nginx /home/log/nginx
+	ln -vsf /var/log/nginx /home/log/nginx
 
 	sed -i 's/user  nginx;/user  www;/g' /etc/nginx/nginx.conf
 
@@ -111,9 +111,9 @@ EOF
 install_redis(){
 	yum -y install redis32u
 
-	ln -sf /etc/redis.conf /home/etc/redis.conf
+	ln -vsf /etc/redis.conf /home/etc/redis.conf
 	rm -rvf /home/log/redis
-	ln -sf /var/log/redis /home/log/redis
+	ln -vsf /var/log/redis /home/log/redis
 
 	start_service redis
 }
