@@ -92,3 +92,10 @@ vreload () {
 vstatus () {
   systemctl status $*
 }
+
+
+# mysql
+# args:  username  pwd  database
+create_mysql_user () {
+	mysql --verbose -uroot -p -e "create USER '$1'@'localhost' IDENTIFIED WITH caching_sha2_password BY '$2'; GRANT SELECT, INSERT, UPDATE, DELETE ON $3.* TO '$1'@'localhost'; flush privileges;"
+}

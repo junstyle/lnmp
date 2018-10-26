@@ -60,7 +60,7 @@ install_mysql(){
 	# yum -y remove mysql*
 	rpm -Uvh https://dev.mysql.com/get/mysql80-community-release-el7-1.noarch.rpm
 
-	yum install mysql-community-server -y
+	yum install mysql-community-server mysql-community-devel -y
 
 	start_service mysqld
 
