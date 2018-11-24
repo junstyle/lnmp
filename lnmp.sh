@@ -74,6 +74,8 @@ install_mysql(){
 	chown mysql:mysql /var/log/mysqld-slow.log
 	ln -vsf /var/log/mysqld-slow.log /home/log/mysqld-slow.log
 
+	ln -vsf /etc/my.cnf /home/etc/my.cnf
+
 	# sed -i 's@executing mysqld_safe@executing mysqld_safe\nexport LD_PRELOAD=/usr/local/lib/libjemalloc.so@' /usr/bin/mysqld_safe
 
 	# show temp pwd
@@ -105,17 +107,27 @@ EOF
 
 	sed -i 's/user  nginx;/user  www;/g' /etc/nginx/nginx.conf
 
+	chown -v www:www /home/etc/nginx/conf.d
+	chmod -v 757 /home/etc/nginx/conf.d
+
 	start_service nginx
 }
 
 install_redis(){
-	yum -y install redis32u
+	yum -y remove redis*
+	yum -y install redis40u
 
 	ln -vsf /etc/redis.conf /home/etc/redis.conf
 	rm -rvf /home/log/redis
 	ln -vsf /var/log/redis /home/log/redis
 
 	start_service redis
+}
+
+install_nodejs(){
+	yum -y remove nodejs*
+	curl -sL https://rpm.nodesource.com/setup_11.x | bash -
+	yum -y install nodejs
 }
 
 opt_server(){
@@ -134,8 +146,10 @@ eof
 	if [[ $? == 1 ]]; then
 		echo "fs.file-max=65535" >> /etc/sysctl.conf
 	fi
-}
 
+	# io 检测工具
+	yum install iotop sysstat -y
+}
 
 echo
 read -p "Please input which do you want to install: " which_install
@@ -162,6 +176,9 @@ case ${which_install} in
 		;;
 	phalcon*)
 		source ./inc/phalcon.sh
+		;;
+	nodejs*)
+		install_nodejs
 		;;
 	*)
 		remove_anmp
