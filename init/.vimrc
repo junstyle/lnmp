@@ -1,6 +1,8 @@
 syntax on
 set showmatch
 
+set paste  "关闭粘贴是自动添加注释
+
 set linebreak " line break
 set nocompatible " no compatible
 set history=400 " history
