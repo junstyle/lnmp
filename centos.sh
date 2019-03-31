@@ -29,7 +29,7 @@ iptables -I INPUT 4 -p tcp -m state --state NEW -m tcp --dport 7639 -j ACCEPT	#4
 iptables -I INPUT 5 -p tcp -m state --state NEW -m tcp --dport 80 -j ACCEPT	#5为规则号
 iptables -I INPUT 6 -p tcp -m state --state NEW -m tcp --dport 443 -j ACCEPT
 iptables-save > /etc/sysconfig/iptables
-		
+
 sed -i 's/#Port 22/Port 7639/g' /etc/ssh/sshd_config
 # service sshd restart
 service sshd restart
