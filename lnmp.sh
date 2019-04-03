@@ -133,6 +133,17 @@ install_nodejs(){
 	yum -y remove nodejs*
 	curl -sL https://rpm.nodesource.com/setup_11.x | bash -
 	yum -y install nodejs
+
+	#添加 NODE_PATH 全局变量
+	cat /etc/profile | grep 'NODE_PATH=/usr' | grep -v grep
+	if [[ $? == 1 ]]; then
+		cat >>/etc/profile<<eof
+
+export NODE_PATH=/usr/lib/node_modules
+eof
+		source /etc/profile
+	fi
+
 }
 
 opt_server(){
