@@ -15,7 +15,6 @@ eof
 	vncserver
 
 	chkconfig vncserver --level 345 on
-	service vncserver stop
 
 	sed -i 's/twm &/#twm &/g' ~/.vnc/xstartup
 	echo 'gnome-session &' >> ~/.vnc/xstartup
@@ -23,7 +22,6 @@ eof
 	yum groupinstall "Desktop" -y
 	yum groupinstall "X Window System" -y
 	yum groupinstall "fonts" -y
-	startx
 
 	service vncserver restart
 
@@ -41,6 +39,8 @@ eof
 		iptables-save > /etc/sysconfig/iptables
 		service iptables restart
 	fi
+
+	startx
 }
 
 install_on_centos7(){
