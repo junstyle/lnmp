@@ -25,6 +25,16 @@ eof
 	yum groupinstall "fonts" -y
 
 	service vncserver restart
+
+	#打开端口
+	iptables -L | grep ACCEPT | grep -v policy | wc -l
+	if [[ $? == 0 ]]; then
+		iid=`iptables -L | grep ACCEPT | grep -v policy | wc -l`
+		iid=$(($iid+1))
+		iptables -I INPUT $iid -p tcp -m state --state NEW -m tcp --dport 5901 -j ACCEPT
+	else
+		iptables -A INPUT -p tcp -m state --state NEW -m tcp --dport 5901 -j ACCEPT
+	fi
 }
 
 install_on_centos7(){
