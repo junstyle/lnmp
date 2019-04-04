@@ -28,7 +28,7 @@ eof
 }
 
 install_on_centos7(){
-	echo 'nothing'
+	echo 'nothing.'
 }
 
 case ${RELEASE} in
