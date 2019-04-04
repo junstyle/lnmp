@@ -49,6 +49,7 @@ else
 	iptables -I INPUT 6 -p tcp -m state --state NEW -m tcp --dport 443 -j ACCEPT
 	iptables-save > /etc/sysconfig/iptables
 fi
+service iptables restart
 
 sed -i 's/#Port 22/Port 7639/g' /etc/ssh/sshd_config
 # service sshd restart
