@@ -15,6 +15,7 @@ eof
 	vncserver
 
 	chkconfig vncserver --level 345 on
+	service vncserver stop
 
 	sed -i 's/twm &/#twm &/g' ~/.vnc/xstartup
 	echo 'gnome-session &' >> ~/.vnc/xstartup
