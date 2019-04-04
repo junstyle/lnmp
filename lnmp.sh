@@ -36,7 +36,14 @@ install_php(){
     groupadd www
     useradd -s /sbin/nologin -g www www
 
-	yum -y install php72u-fpm php72u-cli php72u-xml php72u-gd php72u-mysqlnd php72u-pdo php72u-mcrypt php72u-mbstring php72u-json php72u-pgsql php72u-opcache php72u-pecl-redis php72u-devel
+	case ${RELEASE} in
+		6*)
+			yum -y install php71u-fpm php71u-cli php71u-xml php71u-gd php71u-mysqlnd php71u-pdo php71u-mcrypt php71u-mbstring php71u-json php71u-pgsql php71u-opcache php71u-pecl-redis php71u-devel
+			;;
+		7*)
+			yum -y install php72u-fpm php72u-cli php72u-xml php72u-gd php72u-mysqlnd php72u-pdo php72u-mcrypt php72u-mbstring php72u-json php72u-pgsql php72u-opcache php72u-pecl-redis php72u-devel
+			;;
+	esac
 
 	mkdir -v /home/etc
 	mkdir -v /home/log
