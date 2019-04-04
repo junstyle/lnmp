@@ -5,15 +5,6 @@ yum install tigervnc-server -y
 RELEASE_RPM=$(rpm -qf /etc/redhat-release)
 RELEASE=$(rpm -q --qf '%{VERSION}' ${RELEASE_RPM})
 
-case ${RELEASE} in
-	6*)
-		install_on_centos6
-		;;
-	7*)
-		install_on_centos7
-		;;
-esac
-
 install_on_centos6(){
 	cat >>/etc/sysconfig/vncservers<<eof
 VNCSERVERS="1:root"
@@ -37,3 +28,12 @@ eof
 install_on_centos7(){
 	echo 'nothing'
 }
+
+case ${RELEASE} in
+	6*)
+		install_on_centos6
+		;;
+	7*)
+		install_on_centos7
+		;;
+esac
