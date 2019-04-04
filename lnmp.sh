@@ -1,5 +1,8 @@
 #!/bin/bash
 
+RELEASE_RPM=$(rpm -qf /etc/redhat-release)
+RELEASE=$(rpm -q --qf '%{VERSION}' ${RELEASE_RPM})
+
 remove_anmp(){
 	rpm -qa|grep httpd
     rpm -e httpd httpd-tools
@@ -17,9 +20,6 @@ remove_anmp(){
 }
 
 start_service(){
-	RELEASE_RPM=$(rpm -qf /etc/redhat-release)
-	RELEASE=$(rpm -q --qf '%{VERSION}' ${RELEASE_RPM})
-
 	case ${RELEASE} in
 		6*)
 			chkconfig $1 on
@@ -58,7 +58,15 @@ install_php(){
 
 install_mysql(){
 	# yum -y remove mysql*
-	rpm -Uvh https://dev.mysql.com/get/mysql80-community-release-el7-1.noarch.rpm
+
+	case ${RELEASE} in
+		6*)
+			rpm -Uvh https://dev.mysql.com/get/mysql80-community-release-el6-1.noarch.rpm
+			;;
+		7*)
+			rpm -Uvh https://dev.mysql.com/get/mysql80-community-release-el7-1.noarch.rpm
+			;;
+	esac
 
 	yum install mysql-community-server mysql-community-devel -y
 

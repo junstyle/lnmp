@@ -1,3 +1,5 @@
+#!/bin/bash
+
 echo '都使用默认就行--------------'
 ssh-keygen -t rsa
 
