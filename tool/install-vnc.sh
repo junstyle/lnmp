@@ -35,6 +35,7 @@ eof
 	else
 		iptables -A INPUT -p tcp -m state --state NEW -m tcp --dport 5901 -j ACCEPT
 	fi
+	iptables-save > /etc/sysconfig/iptables
 }
 
 install_on_centos7(){
