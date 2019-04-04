@@ -15,6 +15,8 @@ eof
 
 	chkconfig vncserver --level 345 on
 
+	service vncserver start
+
 	sed -i 's/twm &/#twm &/g' ~/.vnc/xstartup
 	echo 'gnome-session &' >> ~/.vnc/xstartup
 
@@ -22,7 +24,7 @@ eof
 	yum install gnome-classic-session gnome-terminal nautilus-open-terminal control-center liberation-mono-fonts -y
 	yum groupinstall "fonts" -y
 
-	service vncserver start
+	service vncserver restart
 }
 
 install_on_centos7(){
