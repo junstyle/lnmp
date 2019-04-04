@@ -19,8 +19,8 @@ eof
 	sed -i 's/twm &/#twm &/g' ~/.vnc/xstartup
 	echo 'gnome-session &' >> ~/.vnc/xstartup
 
+	yum groupinstall "Desktop" -y
 	yum groupinstall "X Window System" -y
-	yum install gnome-classic-session gnome-terminal nautilus-open-terminal control-center liberation-mono-fonts -y
 	yum groupinstall "fonts" -y
 	startx
 
@@ -38,6 +38,7 @@ eof
 			iptables -A INPUT -p tcp -m state --state NEW -m tcp --dport 5901 -j ACCEPT
 		fi
 		iptables-save > /etc/sysconfig/iptables
+		service iptables restart
 	fi
 }
 
