@@ -1,7 +1,8 @@
 #!/bin/bash
 
 cd ~
-wget http://mirror.yandex.ru/fedora/russianfedora/russianfedora/free/el/updates/6/x86_64/chromium-21.0.1180.89-1.el6.R.x86_64.rpm
+# get from https://pkgs.org/download/chromium
+wget http://mirror.yandex.ru/fedora/russianfedora/russianfedora/free/el/updates/6/x86_64//chromium-21.0.1180.89-1.el6.R.i686.rpm
 
 yum localinstall chromium-21.0.1180.89-1.el6.R.x86_64.rpm -y
 
