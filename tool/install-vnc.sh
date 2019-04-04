@@ -12,10 +12,9 @@ VNCSERVERARGS[1]="-geometry 800x600"
 eof
 
 	vncpasswd
+	vncserver
 
 	chkconfig vncserver --level 345 on
-
-	service vncserver start
 
 	sed -i 's/twm &/#twm &/g' ~/.vnc/xstartup
 	echo 'gnome-session &' >> ~/.vnc/xstartup
@@ -23,6 +22,7 @@ eof
 	yum groupinstall "X Window System" -y
 	yum install gnome-classic-session gnome-terminal nautilus-open-terminal control-center liberation-mono-fonts -y
 	yum groupinstall "fonts" -y
+	startx
 
 	service vncserver restart
 
