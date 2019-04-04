@@ -135,7 +135,14 @@ EOF
 
 install_redis(){
 	yum -y remove redis*
-	yum -y install redis40u
+	case ${RELEASE} in
+		6*)
+			yum -y install redis32u
+			;;
+		7*)
+			yum -y install redis40u
+			;;
+	esac
 
 	ln -vsf /etc/redis.conf /home/etc/redis.conf
 	rm -rvf /home/log/redis
