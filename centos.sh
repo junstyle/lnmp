@@ -2,7 +2,7 @@
 
 source ./inc/set-ius-repo.sh
 
-yum update
+yum update -y
 yum clean all
 
 yum -y install screen dstat		#date && dstat -tclmdnys 60

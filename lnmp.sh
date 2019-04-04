@@ -198,11 +198,11 @@ case ${which_install} in
 	redis*)
 		install_redis
 		;;
-	phalcon*)
-		source ./inc/phalcon.sh
-		;;
 	nodejs*)
 		install_nodejs
+		;;
+	phalcon*)
+		source ./inc/phalcon.sh
 		;;
 	*)
 		remove_anmp
@@ -211,6 +211,7 @@ case ${which_install} in
 		install_mysql
 		install_nginx
 		install_redis
+		install_nodejs
 
 		source ./inc/phalcon.sh
 		source ./etc.sh
