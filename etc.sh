@@ -24,5 +24,5 @@ fi
 
 service php-fpm reload
 service nginx reload
-service redis reload
+service redis restart
 service mysqld reload
