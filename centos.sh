@@ -11,6 +11,21 @@ yum -y install screen dstat		#date && dstat -tclmdnys 60
 RELEASE_RPM=$(rpm -qf /etc/redhat-release)
 RELEASE=$(rpm -q --qf '%{VERSION}' ${RELEASE_RPM})
 
+
+#install remi repo
+case ${RELEASE} in
+	6*)
+		wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
+		wget http://rpms.remirepo.net/enterprise/remi-release-6.rpm
+		rpm -Uvh remi-release-6.rpm epel-release-latest-6.noarch.rpm
+		;;
+	7*)
+		wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+		wget http://rpms.remirepo.net/enterprise/remi-release-7.rpm
+		rpm -Uvh remi-release-7.rpm epel-release-latest-7.noarch.rpm
+		;;
+esac
+
 case ${RELEASE} in
 	7*)
 		systemctl stop firewalld

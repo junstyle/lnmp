@@ -38,10 +38,12 @@ install_php(){
 
 	case ${RELEASE} in
 		6*)
-			yum -y install php71u-fpm php71u-cli php71u-xml php71u-gd php71u-mysqlnd php71u-pdo php71u-mcrypt php71u-mbstring php71u-json php71u-pgsql php71u-opcache php71u-pecl-redis php71u-devel
+			yum install http://rpms.remirepo.net/enterprise/remi-release-6.rpm -y
+			yum -y install php73-php-fpm php73-php-cli php73-php-xml php73-php-gd php73-php-mysqlnd php73-php-pdo php73-php-pecl-mcrypt php73-php-mbstring php73-php-json php73-php-pgsql php73-php-opcache php73-php-pecl-redis4 php73-php-devel php73-php-phalcon3
 			;;
 		7*)
-			yum -y install php72u-fpm php72u-cli php72u-xml php72u-gd php72u-mysqlnd php72u-pdo php72u-mcrypt php72u-mbstring php72u-json php72u-pgsql php72u-opcache php72u-pecl-redis php72u-devel
+			# yum install http://rpms.remirepo.net/enterprise/remi-release-7.rpm -y
+			yum -y install php73u-fpm php73u-cli php73u-xml php73u-gd php73u-mysqlnd php73u-pdo php73u-mcrypt php73u-mbstring php73u-json php73u-pgsql php73u-opcache php73u-pecl-redis php73u-devel
 			;;
 	esac
 
@@ -216,6 +218,7 @@ case ${which_install} in
 		install_nodejs
 		;;
 	phalcon*)
+		# yum install php73-php-phalcon3 -y
 		source ./inc/phalcon.sh
 		;;
 	*)
@@ -227,7 +230,7 @@ case ${which_install} in
 		install_redis
 		install_nodejs
 
-		source ./inc/phalcon.sh
+		# source ./inc/phalcon.sh
 		source ./etc.sh
 		;;
 esac
