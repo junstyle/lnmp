@@ -36,31 +36,47 @@ install_php(){
     groupadd www
     useradd -s /sbin/nologin -g www www
 
-	case ${RELEASE} in
-		6*)
-			yum install http://rpms.remirepo.net/enterprise/remi-release-6.rpm -y
-			yum -y install php73-php-fpm php73-php-cli php73-php-xml php73-php-gd php73-php-mysqlnd php73-php-pdo php73-php-pecl-mcrypt php73-php-mbstring php73-php-json php73-php-pgsql php73-php-opcache php73-php-pecl-redis4 php73-php-devel php73-php-phalcon3
-			;;
-		7*)
-			# yum install http://rpms.remirepo.net/enterprise/remi-release-7.rpm -y
-			yum -y install php73u-fpm php73u-cli php73u-xml php73u-gd php73u-mysqlnd php73u-pdo php73u-mcrypt php73u-mbstring php73u-json php73u-pgsql php73u-opcache php73u-pecl-redis php73u-devel
-			;;
-	esac
-
 	mkdir -v /home/etc
 	mkdir -v /home/log
 
-	ln -vsf /etc/php.ini /home/etc/php.ini
-	ln -vsf /etc/php-fpm.conf /home/etc/php-fpm.conf
-	rm -rvf /home/etc/php-fpm.d
-	ln -vsf /etc/php-fpm.d /home/etc/php-fpm.d
-	rm -rvf /home/etc/php.d
-	ln -vsf /etc/php.d /home/etc/php.d
-	rm -rvf /home/log/php-fpm
-	ln -vsf /var/log/php-fpm /home/log/php-fpm
-	chown www:www /var/log/php-fpm
-	sed -i 's@user = php-fpm@user = www@' /etc/php-fpm.d/www.conf
-	sed -i 's@group = php-fpm@group = www@' /etc/php-fpm.d/www.conf
+	case ${RELEASE} in
+		6*)
+			# yum install http://rpms.remirepo.net/enterprise/remi-release-6.rpm -y
+			# yum -y install php73-php-fpm php73-php-cli php73-php-xml php73-php-gd php73-php-mysqlnd php73-php-pdo php73-php-pecl-mcrypt php73-php-mbstring php73-php-json php73-php-pgsql php73-php-opcache php73-php-pecl-redis4 php73-php-devel php73-php-phalcon3
+
+			# rm -rvf /home/etc/php.ini
+			# ln -vsf /etc/opt/remi/php73/php.ini /home/etc/php.ini
+			# rm -rvf /home/etc/php-fpm.conf
+			# ln -vsf /etc/opt/remi/php73/php-fpm.conf /home/etc/php-fpm.conf
+			# rm -rvf /home/etc/php-fpm.d
+			# ln -vsf /etc/opt/remi/php73/php-fpm.d /home/etc/php-fpm.d
+			# rm -rvf /home/etc/php.d
+			# ln -vsf /etc/opt/remi/php73/php.d /home/etc/php.d
+			# rm -rvf /home/log/php-fpm
+			# ln -vsf /var/opt/remi/php73/log/php-fpm /home/log/php-fpm
+			# chown www:www /var/opt/remi/php73/log/php-fpm
+			# sed -i 's@user = apache@user = www@' /home/etc/php-fpm.d/www.conf
+			# sed -i 's@group = apache@group = www@' /home/etc/php-fpm.d/www.conf
+			# ;;
+		7*)
+			# yum install http://rpms.remirepo.net/enterprise/remi-release-7.rpm -y
+			yum -y install php72u-fpm php72u-cli php72u-xml php72u-gd php72u-mysqlnd php72u-pdo php72u-mcrypt php72u-mbstring php72u-json php72u-pgsql php72u-opcache php72u-pecl-redis php72u-devel
+
+			rm -rvf /home/etc/php.ini
+			ln -vsf /etc/php.ini /home/etc/php.ini
+			rm -rvf /home/etc/php-fpm.conf
+			ln -vsf /etc/php-fpm.conf /home/etc/php-fpm.conf
+			rm -rvf /home/etc/php-fpm.d
+			ln -vsf /etc/php-fpm.d /home/etc/php-fpm.d
+			rm -rvf /home/etc/php.d
+			ln -vsf /etc/php.d /home/etc/php.d
+			rm -rvf /home/log/php-fpm
+			ln -vsf /var/log/php-fpm /home/log/php-fpm
+			chown www:www /var/log/php-fpm
+			sed -i 's@user = php-fpm@user = www@' /etc/php-fpm.d/www.conf
+			sed -i 's@group = php-fpm@group = www@' /etc/php-fpm.d/www.conf
+			;;
+	esac
 
 	start_service php-fpm
 }
