@@ -75,7 +75,7 @@ install_php(){
 			chown www:www /var/log/php-fpm
 			sed -i 's@user = php-fpm@user = www@' /etc/php-fpm.d/www.conf
 			sed -i 's@group = php-fpm@group = www@' /etc/php-fpm.d/www.conf
-			;;
+			# ;;
 	# esac
 
 	start_service php-fpm
