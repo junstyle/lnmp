@@ -1,5 +1,6 @@
 #!/bin/bash
 yum install -y gcc
+yum install -y re2c
 
 backdir=`pwd`
 
