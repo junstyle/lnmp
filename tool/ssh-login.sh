@@ -9,7 +9,7 @@ read -p "请输入要登录的服务器的ip: " remote_ip
 read -p "请输入要登录的服务器的port: " remote_port
 [ -z "$remote_port" ] && remote_port="22"
 if [ "$remote_ip" != "no" ]; then
-	ssh-copy-id -i ~/.ssh/id_rsa.pub -p $remote_port "root@$remote_ip"
+	ssh-copy-id -i ~/.ssh/id_rsa.pub -p $remote_port root@$remote_ip
 else
 	echo '服务器ip不能为空'
 fi
