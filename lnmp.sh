@@ -3,6 +3,10 @@
 RELEASE_RPM=$(rpm -qf /etc/redhat-release)
 RELEASE=$(rpm -q --qf '%{VERSION}' ${RELEASE_RPM})
 
+mkdir -v /home/etc
+mkdir -v /home/log
+mkdir -v /home/www
+
 remove_anmp(){
 	rpm -qa|grep httpd
     rpm -e httpd httpd-tools
@@ -35,9 +39,6 @@ start_service(){
 install_php(){
     groupadd www
     useradd -s /sbin/nologin -g www www
-
-	mkdir -v /home/etc
-	mkdir -v /home/log
 
 	case ${RELEASE} in
 		6*)
