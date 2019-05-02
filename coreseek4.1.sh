@@ -15,7 +15,7 @@ libtoolize --force
 automake --add-missing
 autoconf
 autoheader
-make clean #´ËÊ±ÈçÓĞ´íÎó¿ÉºöÂÔ²»¹Ü
+make clean #æ­¤æ—¶å¦‚æœ‰é”™è¯¯å¯å¿½ç•¥ä¸ç®¡
 # ./bootstrap
 ./configure --prefix=/usr/local/coreseek
 make
@@ -23,18 +23,18 @@ make install
 if [ $? -ne 0 ]; then
 	exit 1
 fi
-echo '-----------mmseg °²×°³É¹¦-----------------'
+echo '-----------mmseg å®‰è£…æˆåŠŸ-----------------'
 
 cd ..
 cd csft-4.1
 make clean
-# ´íÎóĞŞ¸´------------start
+# é”™è¯¯ä¿®å¤------------start
 # detail see: https://blog.csdn.net/jcjc918/article/details/39032689
 sed -i '/&& aclocal \\/a\&& automake --add-missing \\' ./buildconf.sh
 sed -i 's/AM_INIT_AUTOMAKE(\[-Wall -Werror foreign\])/AM_INIT_AUTOMAKE([-Wall foreign])/' ./configure.ac
 sed -i '/AC_PROG_RANLIB/a\AM_PROG_AR' ./configure.ac
 sed -i 's/T val = ExprEval ( this->m_pArg, tMatch );/T val = this->ExprEval ( this->m_pArg, tMatch );/g' ./src/sphinxexpr.cpp
-# ´íÎóĞŞ¸´------------end
+# é”™è¯¯ä¿®å¤------------end
 ./buildconf.sh
 ./configure --prefix=/usr/local/coreseek -without-python --without-unixodbc \
 --with-mmseg=/usr/local/coreseek \
@@ -68,7 +68,7 @@ EOF
 systemctl enable coreseek
 systemctl start coreseek
 
-echo '---------mmseg ²âÊÔ-----------------------'
+echo '---------mmseg æµ‹è¯•-----------------------'
 cd ..
 cd testpack
 /usr/local/coreseek/bin/indexer -c etc/csft.conf --all
