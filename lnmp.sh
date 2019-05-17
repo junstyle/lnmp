@@ -128,7 +128,7 @@ install_mysql(){
 	ln -vsf /etc/my.cnf /home/etc/my.cnf
 
 	#更改tmp目录
-	mkdir /var/tmp/mysql
+	mkdir -v /var/tmp/mysql
 	chown mysql:mysql /var/tmp/mysql -R
 	chmod 777 -R /var/tmp/mysql -R
 

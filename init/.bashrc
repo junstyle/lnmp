@@ -137,3 +137,17 @@ keycolor () {
         echo $line
     done
 }
+
+# block ip
+# args: 121.0.0.0/8  8.3.3.3
+blockip () {
+    iptables -I INPUT -s $1 -j DROP
+    service iptables save
+}
+
+# deblock ip
+# args: 121.0.0.0/8  8.3.3.3
+deblockip () {
+    iptables -D INPUT -s $1 -j DROP
+    service iptables save
+}
