@@ -18,7 +18,7 @@ export HISTCONTROL=ignoredups:erasedups:ignorespace
 
 # format history
 # save in ~/.bashrc
-# 解决不同session中history不丢失的问题
+# 解决不同session中history丢失的问题
 USER_IP=`who -u am i 2>/dev/null| awk '{print $NF}'|sed -e 's/[()]//g'`
 
 export HISTTIMEFORMAT="%Y-%m-%d %H:%M:%S  `whoami`@${USER_IP}: "
