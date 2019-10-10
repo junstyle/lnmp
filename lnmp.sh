@@ -166,6 +166,10 @@ EOF
 	chown -v www:www /home/etc/nginx/conf.d
 	chmod -v 757 /home/etc/nginx/conf.d
 
+	if [ ! -f "/home/etc/nginx/ssl/dhparam.pem" ]; then
+		openssl dhparam -out /home/etc/nginx/ssl/dhparam.pem 2048
+	fi
+
 	start_service nginx
 }
 
