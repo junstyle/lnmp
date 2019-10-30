@@ -193,7 +193,7 @@ install_redis(){
 
 install_nodejs(){
 	yum -y remove nodejs*
-	curl -sL https://rpm.nodesource.com/setup_11.x | bash -
+	curl -sL https://rpm.nodesource.com/setup_12.x | bash -
 	yum -y install nodejs
 
 	#添加 NODE_PATH 全局变量
